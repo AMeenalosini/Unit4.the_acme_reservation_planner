@@ -48,7 +48,8 @@ const {
     }
   });
   
-  server.post("/api/customers/:customer_id/reservations", async (req, res, next) => {
+  //server.post("/api/customers/:customer_id/reservations", async (req, res, next) => {
+    server.post("/api/reservations", async (req, res, next) => {
     try {
       const reservation = await createReservations({
         reservation_date: req.body.reservation_date,
@@ -62,9 +63,10 @@ const {
     }
   });
   
-  server.delete("/api/customers/:customer_id/reservations/:id", async (req, res, next) => {
+  //server.delete("/api/customers/:customer_id/reservations/:id", async (req, res, next) => {
+    server.delete("/api/reservations/:id", async (req, res, next) => {
     try {
-      await destroyReservations(req.params.id, req.params.customer_id);
+      await destroyReservations(req.params.id, req.body.customer_id);
       res.sendStatus(204);
     } catch (error) {
       next(error);
